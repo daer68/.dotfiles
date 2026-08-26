@@ -1,0 +1,8 @@
+[[language]]
+name = "devicetree"
+language-servers = ["devicetree_ls"]
+auto-format = false
+
+[language-server.devicetree_ls]
+command = "devicetree-language-server"
+args = ["--stdio"]
