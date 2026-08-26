@@ -8,7 +8,7 @@
  '(package-selected-packages
    '(aggressive-indent apheleia buffer-guardian buffer-terminator bufferfile cape
                        compile-angel corfu crontab-mode csv-mode dashboard
-                       diff-hl dockerfile-mode dumb-jump easysession
+                       diff-hl dirvish dockerfile-mode dumb-jump easysession
                        embark-consult evil-matchit exec-path-from-shell
                        fish-mode fzf git-modes gnuplot go-mode
                        gruber-darker-theme hcl-mode helpful highlight-defined

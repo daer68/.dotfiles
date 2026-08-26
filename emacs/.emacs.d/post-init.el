@@ -1,3 +1,6 @@
+;; Dirvish (miller-column file manager). Comment out to disable.
+(load (expand-file-name "test.el" user-emacs-directory))
+
 (let ((inhibit-redisplay t))
   ;; Disable all active themes
   (mapc #'disable-theme custom-enabled-themes)
@@ -324,7 +327,7 @@
 ;; Slow Rendering
 ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
 ;; you can try setting the following variable
-;; (setq inhibit-compacting-font-caches t)
+(setq inhibit-compacting-font-caches t)
 
 ;; Dired buffers: Automatically hide file details (permissions, size,
 ;; modification date, etc.) and all the files in the `dired-omit-files' regular
