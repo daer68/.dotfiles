@@ -13,6 +13,10 @@
    '(("h" "~/"             "Home")
      ("p" "~/Projects/"    "Projects")
      ("d" "~/Downloads/"   "Downloads")))
+  ;; Dirvish hides the cursor by default and shows the current line via a
+  ;; highlight face instead (barely visible under gruber-darker). Show a
+  ;; normal cursor instead.
+  (dirvish-hide-cursor nil)
   :config
   ;; `nerd-icons-dired-mode' (configured elsewhere) inserts icons directly
   ;; into the buffer text, which conflicts with Dirvish's own overlay-based
