@@ -1,0 +1,13 @@
+^backup$
+^autosave$
+^eln-cache$
+^elpa$
+^easysession$
+^transient$
+^tree-sitter$
+^undo-fu-session$
+^history$
+^recentf$
+^saveplace$
+^tramp$
+^persist-text-scale$
