@@ -1,6 +1,20 @@
 ;; Dirvish (miller-column file manager). Comment out to disable.
 ;; (load (expand-file-name "test.el" user-emacs-directory))
 
+
+;; transparency
+;; (defun toggle-transparency ()
+;;   (interactive)
+;;   (let ((alpha (frame-parameter nil 'alpha)))
+;;     (if (eq
+;;          (if (numberp alpha)
+;;              alpha
+;;            (cdr alpha)) ; may also be nil
+;;          100)
+;;         (set-frame-parameter nil 'alpha '(70 . 50))
+;;       (set-frame-parameter nil 'alpha '(100 . 100)))))
+
+
 (use-package magit)
 
 (use-package gruber-darker-theme)
@@ -48,43 +62,7 @@
   :config
   (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
         fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 15))
-
-;; use-package with package.el:
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
-
-(setq initial-buffer-choice 'dashboard-open)
-(add-hook 'server-after-make-frame-hook 'dashboard-open)
-
-;; Support for Git files (.gitconfig, .gitignore, .gitattributes...)
-(use-package git-modes
-  :commands (gitattributes-mode
-             gitconfig-mode
-             gitignore-mode)
-  :mode (("/\\.gitignore\\'" . gitignore-mode)
-         ("/info/exclude\\'" . gitignore-mode)
-         ("/git/ignore\\'" . gitignore-mode)
-
-         ("/\\.gitconfig\\'" . gitconfig-mode)
-         ("/\\.git/config\\'" . gitconfig-mode)
-         ("/modules/.*/config\\'" . gitconfig-mode)
-         ("/git/config\\'" . gitconfig-mode)
-         ("/\\.gitmodules\\'" . gitconfig-mode)
-         ("/etc/gitconfig\\'" . gitconfig-mode)
-         55
-         ("/\\.gitattributes\\'" . gitattributes-mode)
-         ("/info/attributes\\'" . gitattributes-mode)
-         ("/git/attributes\\'" . gitattributes-mode)))
+        fzf/git-grep-args "-i --line-number %s"))
 
 ;; Configure built-in sgml-mode to automatically enable
 ;; `sgml-electric-tag-pair-mode' in `html-mode' and `mhtml-mode', providing
