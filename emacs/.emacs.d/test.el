@@ -1,8 +1,9 @@
-;; Dirvish: miller-column style file manager for Dired.
+;; Dirvish (miller-column file manager) and Evil (vim keybindings).
 ;; https://github.com/alexluigit/dirvish
+;; https://github.com/emacs-evil/evil
 ;;
-;; This file is loaded from the top of post-init.el. To disable Dirvish,
-;; comment out the `load' line in post-init.el that references this file.
+;; This file is loaded from the top of post-init.el. To disable everything
+;; in it, comment out the `load' line in post-init.el that references it.
 
 (use-package dirvish
   :ensure t
@@ -51,3 +52,50 @@
    ("M-s" . dirvish-setup-menu)
    ("M-e" . dirvish-emerge-menu)
    ("M-j" . dirvish-fd-jump)))
+
+;; Evil: vim-style modal editing across all of Emacs.
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  (setq evil-respect-visual-line-mode t)
+  ;; Use the already-configured undo-fu instead of evil's own undo-tree.
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (evil-mode 1))
+
+;; evil-collection: vim bindings for built-in and third-party modes
+;; (Dired/Dirvish, magit, etc.) that evil itself doesn't cover.
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
+  :config
+  (evil-collection-init))
+
+;; general.el: SPC leader key (Spacemacs/Doom-style) for Evil's Normal,
+;; Visual, and Motion states. Descriptions show up via which-key (already
+;; configured elsewhere) when you hold SPC.
+(use-package general
+  :ensure t
+  :after evil
+  :config
+  (general-create-definer my-leader-def
+    :states '(normal visual motion)
+    :keymaps 'override
+    :prefix "SPC")
+
+  (my-leader-def
+    "f"  '(:ignore t :which-key "file")
+    "ff" 'find-file
+    "fs" 'save-buffer
+
+    "b"  '(:ignore t :which-key "buffer")
+    "bb" 'switch-to-buffer
+    "bk" 'kill-buffer
+
+    "d"  'dirvish))

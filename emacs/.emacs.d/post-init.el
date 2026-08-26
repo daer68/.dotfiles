@@ -1,6 +1,9 @@
 ;; Dirvish (miller-column file manager). Comment out to disable.
-(load (expand-file-name "test.el" user-emacs-directory))
+;; (load (expand-file-name "test.el" user-emacs-directory))
 
+(use-package magit)
+
+(use-package gruber-darker-theme)
 (let ((inhibit-redisplay t))
   ;; Disable all active themes
   (mapc #'disable-theme custom-enabled-themes)
@@ -632,7 +635,7 @@
   ;; (setq easysession-mode-line-misc-info t)
   ;; non-nil: Make `easysession-setup' load the session automatically.
   ;; (nil: session is not loaded automatically; the user can load it manually.)
-  (setq easysession-setup-load-session t)
+  (setq easysession-setup-load-session nil)
 
   ;; The `easysession-setup' function adds hooks:
   ;; - To enable automatic session loading during `emacs-startup-hook', or
