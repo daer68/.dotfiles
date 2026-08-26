@@ -1,0 +1,11 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("emacs settings"
+ (filename . "~/.emacs.d/post-init.el")
+ (front-context-string . "\n(use-package pe")
+ (rear-context-string . "vka Nerd Font\")\n")
+ (position . 185)
+ (last-modified 27275 8091 165691 620000))
+)

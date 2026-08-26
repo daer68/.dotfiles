@@ -1,0 +1,17 @@
+# Emacs compiled bytecode — regenerated from the matching .el on load
+emacs/.emacs.d/**/*.elc
+
+# Emacs runtime/cache state — regenerated automatically, never hand-edited
+emacs/.emacs.d/backup/
+emacs/.emacs.d/autosave/
+emacs/.emacs.d/eln-cache/
+emacs/.emacs.d/elpa/
+emacs/.emacs.d/easysession/
+emacs/.emacs.d/transient/
+emacs/.emacs.d/tree-sitter/
+emacs/.emacs.d/undo-fu-session/
+emacs/.emacs.d/history
+emacs/.emacs.d/recentf
+emacs/.emacs.d/saveplace
+emacs/.emacs.d/tramp
+emacs/.emacs.d/persist-text-scale

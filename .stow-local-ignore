@@ -1,0 +1,14 @@
+.gitconfig
+.git
+.gitignore
+.git/
+
+backup/
+autosave/
+eln-cache/
+elpa/
+easysession/
+transient/
+tree-sitter/
+undo-fu-session/
+tmp_config.json
