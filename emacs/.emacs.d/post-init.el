@@ -1,21 +1,17 @@
 ;; Dirvish (miller-column file manager). Comment out to disable.
 ;; (load (expand-file-name "test.el" user-emacs-directory))
 
-
 ;; transparency
-;; (defun toggle-transparency ()
-;;   (interactive)
-;;   (let ((alpha (frame-parameter nil 'alpha)))
-;;     (if (eq
-;;          (if (numberp alpha)
-;;              alpha
-;;            (cdr alpha)) ; may also be nil
-;;          100)
-;;         (set-frame-parameter nil 'alpha '(70 . 50))
-;;       (set-frame-parameter nil 'alpha '(100 . 100)))))
-
+(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha . 100))
 
 (use-package magit)
+
+;; use-package with package.el:
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
 
 (use-package gruber-darker-theme)
 (let ((inhibit-redisplay t))
