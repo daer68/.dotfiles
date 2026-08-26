@@ -15,3 +15,4 @@ emacs/.emacs.d/recentf
 emacs/.emacs.d/saveplace
 emacs/.emacs.d/tramp
 emacs/.emacs.d/persist-text-scale
+emacs/.emacs.d/custom.el
