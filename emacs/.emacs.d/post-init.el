@@ -411,11 +411,11 @@
   (dolist (var '("TMPDIR"
                  "SSH_AUTH_SOCK" "SSH_AGENT_PID"
                  "GPG_AGENT_INFO"
-                 ;; "FZF_DEFAULT_COMMAND" "FZF_DEFAULT_OPTS" ; fzf
-                 ;; "VIRTUAL_ENV" ; Python
-                 ;; "GOPATH" "GOROOT" "GOBIN" ; Go
-                 ;; "CARGO_HOME" "RUSTUP_HOME" ; Rust
-                 ;; "NVM_DIR" "NODE_PATH" ; Node/JS
+                 "FZF_DEFAULT_COMMAND" "FZF_DEFAULT_OPTS" ; fzf
+                 "VIRTUAL_ENV" ; Python
+                 "GOPATH" "GOROOT" "GOBIN" ; Go
+                 "CARGO_HOME" "RUSTUP_HOME" ; Rust
+                 "NVM_DIR" "NODE_PATH" ; Node/JS
                  "LANG" "LC_CTYPE"))
     (add-to-list 'exec-path-from-shell-variables var))
   ;; Initialize
