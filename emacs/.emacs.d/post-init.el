@@ -1,11 +1,13 @@
-;; Dirvish (miller-column file manager). Comment out to disable.
-;; (load (expand-file-name "test.el" user-emacs-directory))
-
-;; transparency
+;;j transparency
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 ;; (add-to-list 'default-frame-alist '(alpha . 100))
 
-(use-package magit)
+(use-package magit
+  :bind
+  )
+
+;; make ESC quit prompts
+(global-set-key(kbd "<escape>") 'keyboard-escape-quit)
 
 ;; use-package with package.el:
 (use-package dashboard
@@ -67,120 +69,6 @@
   :ensure nil
   :commands (sgml-mode sgml-electric-tag-pair-mode)
   :hook ((html-mode mhtml-mode) . sgml-electric-tag-pair-mode))
-
-;; Support for YAML files.
-;;
-;; NOTE: Prefer the tree-sitter-based yaml-ts-mode over yaml-mode when
-;; available, as it provides more accurate syntax parsing and enhanced editing
-;; features.
-(use-package yaml-mode
-  :commands yaml-mode
-  :mode (("\\.yaml\\'" . yaml-mode)
-         ("\\.yml\\'" . yaml-mode)))
-
-;; Support for Dockerfile files.
-;;
-;; NOTE: Prefer the tree-sitter-based dockerfile-ts-mode over dockerfile-mode
-;; when available, as it provides more accurate syntax parsing and enhanced
-;; editing features.
-(use-package dockerfile-mode
-  :commands dockerfile-mode
-  :mode ("Dockerfile\\'" . dockerfile-mode))
-
-;; Support for Gnuplot files
-(use-package gnuplot
-  :commands gnuplot-mode
-  :mode ("\\.gp\\'" . gnuplot-mode))
-
-;; Support for *.lua files.
-;;
-;; Prefer the tree-sitter-based lua-ts-mode over lua-mode when available, as it
-;; provides more accurate syntax parsing and enhanced editing features.
-(use-package lua-mode
-  :commands lua-mode
-  :mode ("\\.lua\\'" . lua-mode))
-
-;; Jinja2 template support for files commonly used in configuration management
-;; systems and web frameworks. This mode enables syntax highlighting and basic
-;; editing facilities for templates written using the Jinja2 templating
-;; language.
-(use-package jinja2-mode
-  :commands jinja2-mode
-  :mode ("\\.j2\\'" . jinja2-mode))
-
-;; CSV file support with automatic column alignment. This configuration enables
-;; csv-align-mode whenever a CSV file is opened, improving readability by
-;; keeping columns visually aligned according to a configurable maximum width
-;; and a set of recognized field separators.
-(use-package csv-mode
-  :commands (csv-mode
-             csv-align-mode
-             csv-guess-set-separator)
-  :mode ("\\.csv\\'" . csv-mode)
-  :hook ((csv-mode . csv-align-mode)
-         (csv-mode . csv-guess-set-separator))
-  :custom
-  (csv-align-max-width 100)
-  (csv-separators '("," ";" " " "|" "\t")))
-
-;; Support for Go
-;;
-;; NOTE: Prefer the tree-sitter-based go-ts-mode over go-mode
-;; when available, as it provides more accurate syntax parsing and enhanced
-;; editing features.
-(use-package go-mode
-  :commands go-mode
-  :mode ("\\.go\\'" . go-mode))
-
-;; Support for Rust
-(use-package rust-mode
-  :commands rust-mode
-  :mode ("\\.rs\\'" . rust-mode)
-  :custom
-  (rust-indent-offset 2))
-
-;; Major mode for editing crontab files
-(use-package crontab-mode
-  :commands crontab-mode
-  :mode ("/crontab\\(\\.X*[[:alnum:]]+\\)?\\'"  . crontab-mode))
-
-;; Major mode for editing Nginx configuration files
-(use-package nginx-mode
-  :commands nginx-mode
-  :mode (("nginx\\.conf\\'" . nginx-mode)
-         ("/nginx/.+\\.conf\\'" . nginx-mode)))
-
-;; Major mode for HashiCorp Configuration Language (HCL) files
-(use-package hcl-mode
-  :commands hcl-mode
-  :mode ("\\.hcl\\'" . hcl-mode))
-
-;; Major mode for Nix expression language files
-(use-package nix-mode
-  :commands nix-mode
-  :mode ("\\.nix\\'" . nix-mode))
-
-;; Major mode for editing Fish shell scripts
-(use-package fish-mode
-  :commands fish-mode
-  :mode ("\\.fish\\'" . fish-mode))
-
-;; Vim configuration file support. This mode provides syntax highlighting and
-;; editing support for various Vim configuration files, including vimrc, gvimrc,
-;; local overrides, and project-specific configuration files.
-(use-package vimrc-mode
-  :commands vimrc-mode
-  :mode ("\\.vim\\(rc\\)?\\'" . vimrc-mode))
-
-;; Support for Jenkinsfile files
-(use-package jenkinsfile-mode
-  :commands jenkinsfile-mode
-  :mode ("Jenkinsfile\\'" . jenkinsfile-mode))
-
-;; Support for Haskell
-;; (use-package haskell-mode
-;;   :commands haskell-mode
-;;   :mode ("\\.hs\\'" . haskell-mode))
 
 ;;; Enable automatic insertion and management of matching pairs of characters
 ;;; (e.g., (), {}, "") globally using `electric-pair-mode'.
@@ -519,11 +407,11 @@
 ;; Vertico provides a vertical completion interface, making it easier to
 ;; navigate and select from completion candidates (e.g., when `M-x` is pressed).
 (use-package vertico
-  ;; :custom
-  ;; (vertico-scroll-margin 0) ;; Different scroll margin
-  ;; (vertico-count 20) ;; Show more candidates
-  ;; (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
-  ;; (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :custom
+  (vertico-scroll-margin 0) ;; Different scroll margin
+  (vertico-count 20) ;; Show more candidates
+  (vertico-resize t) ;; Grow and shrink the Vertico minibuffer
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
   :init
   (vertico-mode 1))
 
@@ -554,6 +442,145 @@
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode 1))
+
+;; Embark integrates with Consult and Vertico to provide context-sensitive
+;; actions and quick access to commands based on the current selection, further
+;; improving user efficiency and workflow within Emacs. Together, they create a
+;; cohesive environment for managing completions and interactions.
+(use-package embark
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+  :init
+
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  ;; Add Embark to the mouse context menu. Also enable `context-menu-mode'.
+  ;; (context-menu-mode 1)
+  ;; (add-hook 'context-menu-functions #'embark-context-menu 100)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult)
+
+;; Consult offers a suite of commands for efficient searching, previewing, and
+;; interacting with buffers, file contents, and more, improving various tasks.
+
+(use-package consult
+  ;; Replace bindings. Lazily loaded by `use-package'.
+  :bind (;; C-c bindings in `mode-specific-map'
+         ("C-c M-x" . consult-mode-command)
+         ("C-c h" . consult-history)
+         ("C-c k" . consult-kmacro)
+         ("C-c m" . consult-man)
+         ("C-c i" . consult-info)
+         ([remap Info-search] . consult-info)
+         ;; C-x bindings in `ctl-x-map'
+         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+         ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ;; Custom M-# bindings for fast register access
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
+         ;; Other custom bindings
+         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+         ;; M-g bindings in `goto-map'
+         ("M-g e" . consult-compile-error)
+         ("M-g r" . consult-grep-match)
+         ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+         ("M-g g" . consult-goto-line)             ;; orig. goto-line
+         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
+         ;; M-s bindings in `search-map'
+         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ("M-s c" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s L" . consult-line-multi)
+         ("M-s k" . consult-keettp-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch-history)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+         ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+         ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+         ;; Minibuffer history
+         :map minibuffer-local-map
+         ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+         ("M-r" . consult-history))                ;; orig. previous-matching-history-element
+
+  ;; The :init configuration is always executed (Not lazy)
+  :init
+
+  ;; Tweak the register preview for `consult-register-load',
+  ;; `consult-register-store' and the built-in commands.  This improves the
+  ;; register formatting, adds thin separator lines, register sorting and hides
+  ;; the window mode line.
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq register-preview-delay 0.5)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
+
+  ;; Configure other variables and modes in the :config section,
+  ;; after lazily loading the package.
+  :config
+
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  (consult-customize
+   consult-theme :preview-key '(:debounce 0.2 any)
+   consult-ripgrep consult-git-grep consult-grep consult-man
+   consult-bookmark consult-recent-file consult-xref
+   consult-source-bookmark consult-source-file-register
+   consult-source-recent-file consult-source-project-recent-file
+   ;; :preview-key "M-."
+   :preview-key '(:debounce 0.4 any))
+
+  ;; Optionally configure the narrowing key.
+  ;; Both < and C-+ work reasonably well.
+  (setq consult-narrow-key "<") ;; "C-+"
+
+  ;; Optionally make narrowing help available in the minibuffer.
+  ;; You may want to use `embark-prefix-help-command' or which-key instead.
+  ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
+  )
 
 ;; The undo-fu package is a lightweight wrapper around Emacs' built-in undo
 ;; system, providing more convenient undo/redo functionality.
@@ -772,6 +799,7 @@
                          :rope_autoimport (:enabled :json-false)))))
 
 (use-package buffer-terminator
+  :diminish
   :custom
   ;; Enable/Disable verbose mode to log buffer cleanup events
   (buffer-terminator-verbose nil)
