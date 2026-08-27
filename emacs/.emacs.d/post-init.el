@@ -8,6 +8,7 @@
 
 ;; make ESC quit prompts
 (global-set-key(kbd "<escape>") 'keyboard-escape-quit)
+(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 ;; use-package with package.el:
 (use-package dashboard

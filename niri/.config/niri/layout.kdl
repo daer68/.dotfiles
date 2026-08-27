@@ -24,9 +24,9 @@ layout {
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
     }
-    
+
     empty-workspace-above-first
-    
+
     // You can also customize the heights that "switch-preset-window-height" (Mod+Ctrl+Shift+R) toggles between.
     // preset-window-heights { }
 
@@ -53,6 +53,13 @@ layout {
 
         // How many logical pixels the ring extends out from the windows.
         width 2
+
+
+
+        active-color   "#ffdd33"
+        inactive-color "#181818"
+        urgent-color   "#f43841"
+
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -91,6 +98,11 @@ layout {
         on
 
         width 2
+
+        active-color   "#ffdd33"
+        inactive-color "#181818"
+        urgent-color   "#f43841"
+
         // active-color "#ffc87f"
         // inactive-color "black"
 
@@ -101,7 +113,7 @@ layout {
         // For example, this is a pastel rainbow gradient via in="oklch longer hue".
         //
         // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-        
+
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
@@ -139,7 +151,7 @@ layout {
         offset x=0 y=5
 
         // You can also change the shadow color and opacity.
-        color "#0007"
+        color "#10101070"
     }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
@@ -148,11 +160,29 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 4 
+        // left 4
         // right 4
         // top 64
         // bottom 64
     }
+
+    tab-indicator {
+        active-color   "#ffdd33"
+        inactive-color "#806a00"
+        urgent-color   "#f43841"
+    }
+
+    insert-hint {
+        color "#ffdd3380"
+    }
+}
+
+recent-windows {
+    highlight {
+        active-color "#ffdd33"
+        urgent-color "#f43841"
+    }
+
 }
 
 
@@ -199,7 +229,7 @@ window-rule {
     // since this is the default config, and we want no false positives.
     // You can get away with just app-id="wezterm" if you want.
     match app-id="kitty"
-    default-column-width 
+    default-column-width
 }
 
 // Open the Zen picture-in-picture player as floating by default.

@@ -3,7 +3,6 @@ include "input.kdl"
 include "startup.kdl"
 include "output.kdl"
 include "binds.kdl"
-include "noctalia.kdl"
 
 environment {
     XCURSOR_THEME "adwaita"
@@ -12,3 +11,4 @@ environment {
 cursor {
     hide-after-inactive-ms 4000
 }
+
