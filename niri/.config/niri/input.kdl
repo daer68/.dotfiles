@@ -1,0 +1,38 @@
+input {
+    warp-mouse-to-focus
+
+    focus-follows-mouse max-scroll-amount="20%"
+
+    keyboard {
+        xkb {
+            layout "us,ru"
+            options "grp:caps_toggle,ctrl:nocaps"
+	        }
+        numlock
+        track-layout "window"
+        repeat-delay 300
+        repeat-rate 40
+
+    }
+    touchpad {
+        // off
+        // tap
+        dwt
+        // dwtp
+        // drag false
+        drag-lock
+        natural-scroll
+
+        drag false
+
+        accel-profile "adaptive"
+
+        click-method "clickfinger"
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "two-finger"
+        // disabled-on-external-mouse
+    		}
+    mouse 
+    trackpoint 
+}
