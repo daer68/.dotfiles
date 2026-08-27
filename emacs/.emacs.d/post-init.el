@@ -23,6 +23,11 @@
   ;; Load the built-in theme
   (load-theme 'gruber-darker t))
 
+;; Doom modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 
 ;; Set the default font to DejaVu Sans Mono with specific size and weight
 (set-face-attribute 'default nil
@@ -92,7 +97,7 @@
 (setq mode-line-position-column-line-format '("%l:%C"))
 
 ;; Display of line numbers in the buffer:
-(setq-default display-line-numbers-type 'relative)
+(setq-default display-line-numbers-type 't)
 (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
   (add-hook hook #'display-line-numbers-mode))
 
@@ -123,7 +128,7 @@
   (pixel-scroll-precision-mode 1))
 
 ;; Display the time in the modeline
-(display-time-mode 1)
+(display-time-mode 0)
 
 ;; Paren match highlighting
 (show-paren-mode 1)
@@ -1046,3 +1051,7 @@
 ;; (use-package haskell-mode
 ;;   :commands haskell-mode
 ;;   :mode ("\\.hs\\'" . haskell-mode))
+
+(use-package kdl-mode
+  :commands kdl-mode
+  :mode ("\\.kdl\\'" . kdl-mode))
