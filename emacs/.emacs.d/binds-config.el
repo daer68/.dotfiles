@@ -70,7 +70,86 @@ plain shifted arrow key already does."
 (use-package move-text
   :ensure t
   :config
-  (move-text-default-bindings))
+  (move-text-default-bindings)
+  ;; Coalesce consecutive M-up/M-down presses into a single undo step,
+  ;; the same way Emacs merges consecutive self-insert-command keystrokes.
+  ;; `undo-auto-amalgamate' takes no arguments, but move-text-up/-down are
+  ;; called with (start end n) from their interactive spec, and :before
+  ;; advice is invoked with the same args as the advised function — so a
+  ;; wrapper that discards them is needed, not the bare symbol.
+  (dolist (cmd '(move-text-up move-text-down))
+    (advice-add cmd :before (lambda (&rest _) (undo-auto-amalgamate)))))
+
+;; Swap the paragraph at point with the next/previous one on
+;; Ctrl+Alt+Shift+Up/Down. Plain Ctrl+Alt+Up/Down is left alone — it's
+;; stock backward-up-list/down-list, used for structural navigation.
+;;
+;; Deliberately NOT using stock `transpose-paragraphs': its region math
+;; (via `transpose-subr') splits a paragraph's blank-line separator
+;; asymmetrically between the two paragraphs being swapped, so swapping
+;; two blocks that don't carry a matching pair of half-separators loses
+;; or merges blank lines (verified — corrupts even on the very first
+;; call, not just on repeated ones).
+;;
+;; Instead: only ever swap each paragraph's actual TEXT (leading/trailing
+;; blank lines excluded), and never touch the blank-line whitespace
+;; itself — it stays at its original buffer position/size throughout.
+;; Since gaps never move, there's nothing to miscount, regardless of gap
+;; size, first/last-paragraph edges, or a missing final newline.
+(defun binds-config--paragraph-text-bounds (pos)
+  "Return (BEG . END) bounding the paragraph's actual text at POS,
+excluding any surrounding blank lines."
+  (save-excursion
+    (cons (progn (goto-char pos) (backward-paragraph 1) (skip-chars-forward " \t\n") (point))
+          (progn (goto-char pos) (forward-paragraph 1) (skip-chars-backward " \t\n") (point)))))
+
+(defun binds-config--move-paragraph (direction)
+  "Swap the paragraph at point's text with the next (DIRECTION > 0)
+or previous (DIRECTION < 0) paragraph's text; a no-op at the first/last
+paragraph in the buffer."
+  (let* ((cur (binds-config--paragraph-text-bounds (point)))
+         (cur-beg (car cur)) (cur-end (cdr cur))
+         (offset (min (max 0 (- (point) cur-beg)) (- cur-end cur-beg))))
+    (if (> direction 0)
+        (let ((probe (save-excursion (goto-char cur-end) (skip-chars-forward " \t\n") (point))))
+          (when (< probe (point-max))
+            (let* ((nxt (binds-config--paragraph-text-bounds probe))
+                   (next-beg (car nxt)) (next-end (cdr nxt))
+                   (cur-text (buffer-substring cur-beg cur-end))
+                   (next-text (buffer-substring next-beg next-end)))
+              ;; Edit the later region first so CUR-BEG stays valid; use a
+              ;; marker for the target point since the second edit (at an
+              ;; earlier position) would otherwise shift NEXT-BEG's offset.
+              (goto-char next-beg) (delete-region next-beg next-end) (insert cur-text)
+              (let ((target (copy-marker (+ next-beg offset))))
+                (goto-char cur-beg) (delete-region cur-beg cur-end) (insert next-text)
+                (goto-char target)
+                (set-marker target nil)))))
+      (let ((probe (save-excursion (goto-char cur-beg) (skip-chars-backward " \t\n") (point))))
+        (when (> probe (point-min))
+          (let* ((prv (binds-config--paragraph-text-bounds (1- probe)))
+                 (prev-beg (car prv)) (prev-end (cdr prv))
+                 (cur-text (buffer-substring cur-beg cur-end))
+                 (prev-text (buffer-substring prev-beg prev-end)))
+            (goto-char cur-beg) (delete-region cur-beg cur-end) (insert prev-text)
+            (goto-char prev-beg) (delete-region prev-beg prev-end) (insert cur-text)
+            (goto-char (+ prev-beg offset))))))))
+
+(defun binds-config-transpose-paragraph-down ()
+  "Move the paragraph at point past the next paragraph."
+  (interactive)
+  (binds-config--move-paragraph 1))
+
+(defun binds-config-transpose-paragraph-up ()
+  "Move the paragraph at point past the previous paragraph."
+  (interactive)
+  (binds-config--move-paragraph -1))
+
+(dolist (cmd '(binds-config-transpose-paragraph-down binds-config-transpose-paragraph-up))
+  (advice-add cmd :before (lambda (&rest _) (undo-auto-amalgamate))))
+
+(global-set-key (kbd "C-M-S-<down>") #'binds-config-transpose-paragraph-down)
+(global-set-key (kbd "C-M-S-<up>")   #'binds-config-transpose-paragraph-up)
 
 (provide 'binds-config)
 ;;; binds-config.el ends here

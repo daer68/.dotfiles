@@ -1,4 +1,4 @@
-;;j transparency
+;;transparency
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 ;; (add-to-list 'default-frame-alist '(alpha . 100))
 
@@ -649,6 +649,15 @@
   ;; - To save the session at regular intervals, and when Emacs exits.
   (easysession-setup))
 
+;; Automatically generate a table of contents when editing Markdown files
+(use-package markdown-toc
+  :commands (markdown-toc-generate-toc
+             markdown-toc-generate-or-refresh-toc
+             markdown-toc-delete-toc
+             markdown-toc--toc-already-present-p)
+  :custom
+  (markdown-toc-header-toc-title "**Table of Contents**"))
+
 ;; The markdown-mode package provides a major mode for Emacs for syntax
 ;; highlighting, editing commands, and preview support for Markdown documents.
 ;; It supports core Markdown syntax as well as extensions like GitHub Flavored
@@ -664,15 +673,6 @@
   :bind
   (:map markdown-mode-map
         ("C-c C-e" . markdown-do)))
-
-;; Automatically generate a table of contents when editing Markdown files
-(use-package markdown-toc
-  :commands (markdown-toc-generate-toc
-             markdown-toc-generate-or-refresh-toc
-             markdown-toc-delete-toc
-             markdown-toc--toc-already-present-p)
-  :custom
-  (markdown-toc-header-toc-title "**Table of Contents**"))
 
 ;; Apheleia is an Emacs package designed to run code formatters (e.g., Shfmt,
 ;; Black and Prettier) asynchronously without disrupting the cursor position.
