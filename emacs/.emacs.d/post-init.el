@@ -1,6 +1,6 @@
 ;;transparency
-;; (add-to-list 'default-frame-alist '(alpha-background . 90))
-;; (add-to-list 'default-frame-alist '(alpha . 100))
+(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha . 90))
 
 ;; A file and project explorer for Emacs that displays a structured tree
 ;; layout, similar to file browsers in modern IDEs. It functions as a sidebar
@@ -328,7 +328,7 @@
                                "\\|\\(?:\\.js\\)?\\.meta\\'"
                                "\\|\\.\\(?:elc|a\\|o\\|pyc\\|pyo\\|swp\\|class\\)\\'"
                                "\\|^\\.ds_store\\'"
-                               "\\|^\\.\\(?:svn\\|git\\)\\'"
+                               "\\|^\\.\\(?:svn\\|agit\\)\\'"
                                "\\|^\\.ccls-cache\\'"
                                "\\|^__pycache__\\'"
                                "\\|^\\.project\\(?:ile\\)?\\'"
