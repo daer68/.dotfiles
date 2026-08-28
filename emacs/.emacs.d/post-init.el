@@ -8,7 +8,6 @@
 
 ;; make ESC quit prompts
 (global-set-key(kbd "<escape>") 'keyboard-escape-quit)
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
 ;; use-package with package.el:
 (use-package dashboard
@@ -1055,3 +1054,6 @@
 (use-package kdl-mode
   :commands kdl-mode
   :mode ("\\.kdl\\'" . kdl-mode))
+
+;; CUA mode, shift-selection, and related keybindings, see binds-config.el
+(load (expand-file-name "binds-config.el" user-emacs-directory))
