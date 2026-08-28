@@ -21,80 +21,77 @@ layout {
         proportion 0.7
         proportion 0.999999
 
-        // Fixed sets the width in logical pixels exactly.
+        // fixed sets the width in logical pixels exactly.
         // fixed 1920
     }
 
     empty-workspace-above-first
 
-    // You can also customize the heights that "switch-preset-window-height" (Mod+Ctrl+Shift+R) toggles between.
+    // you can also customize the heights that "switch-preset-window-height" (mod+ctrl+shift+r) toggles between.
     // preset-window-heights { }
 
-    // You can change the default width of the new windows.
+    // you can change the default width of the new windows.
     // default-column-width { proportion 0.5; }
-    // If you leave the brackets empty, the windows themselves will decide their initial width.
+    // if you leave the brackets empty, the windows themselves will decide their initial width.
     default-column-width {}
 
-    // By default focus ring and border are rendered as a solid background rectangle
-    // behind windows. That is, they will show up through semitransparent windows.
-    // This is because windows using client-side decorations can have an arbitrary shape.
+    // by default focus ring and border are rendered as a solid background rectangle
+    // behind windows. that is, they will show up through semitransparent windows.
+    // this is because windows using client-side decorations can have an arbitrary shape.
     //
-    // If you don't like that, you should uncomment `prefer-no-csd` below.
-    // Niri will draw focus ring and border *around* windows that agree to omit their
+    // if you don't like that, you should uncomment `prefer-no-csd` below.
+    // niri will draw focus ring and border *around* windows that agree to omit their
     // client-side decorations.
     //
-    // Alternatively, you can override it with a window rule called
+    // alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
 
-    // You can change how the focus ring looks.
+    // you can change how the focus ring looks.
     focus-ring {
-        // Uncomment this line to disable the focus ring.
+        // uncomment this line to disable the focus ring.
         off
 
-        // How many logical pixels the ring extends out from the windows.
+        // how many logical pixels the ring extends out from the windows.
         width 2
-
-
 
         active-color   "#ffdd33"
         inactive-color "#181818"
         urgent-color   "#f43841"
 
+        // colors can be set in a variety of ways:
+        // - css named colors: "red"
+        // - rgb hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
+        // - css-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
-
-        // Color of the ring on the active monitor.
+        // color of the ring on the active monitor.
         // active-color "#7fc8ff"
 
-        // Color of the ring on inactive monitors.
+        // color of the ring on inactive monitors.
         //
-        // The focus ring only draws around the active window, so the only place
+        // the focus ring only draws around the active window, so the only place
         // where you can see its inactive-color is on other monitors.
         // inactive-color "#505050"
 
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
+        // you can also use gradients. they take precedence over solid colors.
+        // gradients are rendered the same as css linear-gradient(angle, from, to).
+        // the angle is the same as in linear-gradient, and is optional,
         // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        // Changing the color space is also supported, check the wiki for more info.
+        // you can use any css linear-gradient tool on the web to set these up.
+        // changing the color space is also supported, check the wiki for more info.
         //
         // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
 
-        // You can also color the gradient relative to the entire view
+        // you can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
-        // To do that, set relative-to="workspace-view".
+        // to do that, set relative-to="workspace-view".
         //
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can also add a border. It's similar to the focus ring, but always visible.
+    // you can also add a border. it's similar to the focus ring, but always visible.
     border {
-        // The settings are the same as for the focus ring.
-        // If you enable the border, you probably want to disable the focus ring.
+        // the settings are the same as for the focus ring.
+        // if you enable the border, you probably want to disable the focus ring.
         on
 
         width 2
@@ -106,20 +103,20 @@ layout {
         // active-color "#ffc87f"
         // inactive-color "black"
 
-        // Color of the border around windows that request your attention.
+        // color of the border around windows that request your attention.
         // urgent-color "#9b0000"
 
-        // Gradients can use a few different interpolation color spaces.
-        // For example, this is a pastel rainbow gradient via in="oklch longer hue".
+        // gradients can use a few different interpolation color spaces.
+        // for example, this is a pastel rainbow gradient via in="oklch longer hue".
         //
         // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
 
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can enable drop shadows for windows.
+    // you can enable drop shadows for windows.
     shadow {
-        // Uncomment the next line to enable shadows.
+        // uncomment the next line to enable shadows.
         // on
 
         // By default, the shadow draws only around its window, and not behind it.
@@ -311,8 +308,8 @@ window-rule {
 
 /* You can also fine-tune the blur effect globally. */
 blur {
-  passes 5        // more passes = stronger blur (default: 3)
+  passes 3        // more passes = stronger blur (default: 3)
   offset 3.0      // sample distance per pass (default: 3.0)
   noise 0.04      // grain overlay (default: 0.02)
-  saturation 1.5  // color saturation boost (default: 1.5)
+  saturation 1  // color saturation boost (default: 1.5)
 }
