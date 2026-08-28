@@ -1,5 +1,5 @@
 ;;transparency
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
 ;; (add-to-list 'default-frame-alist '(alpha . 100))
 
 ;; A file and project explorer for Emacs that displays a structured tree
@@ -115,6 +115,11 @@
 ;;   :config (treemacs-set-scope-type 'Tabs))
 ;;
 ;; (treemacs-start-on-boot)
+
+;; Give Emacs tab-bar a style similar to Vim's
+(use-package vim-tab-bar
+  :init
+  (vim-tab-bar-mode 1))
 
 (use-package magit
   :bind
