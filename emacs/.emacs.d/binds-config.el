@@ -151,5 +151,20 @@ paragraph in the buffer."
 (global-set-key (kbd "C-M-S-<down>") #'binds-config-transpose-paragraph-down)
 (global-set-key (kbd "C-M-S-<up>")   #'binds-config-transpose-paragraph-up)
 
+;; Real multi-cursor editing: mark several points, type once, it applies to
+;; all of them. C->/C-</C-c C-< are multiple-cursors.el's own README
+;; bindings. mc/edit-lines is NOT on its usual C-S-c C-S-c: verified live
+;; (view-lossage) that this terminal/tmux setup delivers Ctrl+Shift+<letter>
+;; as byte-for-byte identical to plain Ctrl+<letter> — same ambiguity
+;; already worked around for C-S-a and cua-rectangle-mark-key elsewhere in
+;; this file. C-c C-m avoids that entirely (plain, unshifted Ctrl-modified
+;; keys only) and isn't bound to anything else in this config.
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C->"     . mc/mark-next-like-this)
+         ("C-<"     . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-c C-m" . mc/edit-lines)))
+
 (provide 'binds-config)
 ;;; binds-config.el ends here
