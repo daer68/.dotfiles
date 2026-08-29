@@ -166,5 +166,7 @@ paragraph in the buffer."
          ("C-c C-<" . mc/mark-all-like-this)
          ("C-c C-m" . mc/edit-lines)))
 
+;; (windmove-default-keybindings 'meta)
+
 (provide 'binds-config)
 ;;; binds-config.el ends here

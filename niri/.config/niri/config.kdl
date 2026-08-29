@@ -12,3 +12,5 @@ cursor {
     hide-after-inactive-ms 4000
 }
 
+
+include "noctalia.kdl"

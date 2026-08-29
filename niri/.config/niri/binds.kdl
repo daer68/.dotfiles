@@ -1,5 +1,5 @@
 binds {
-    //Mod+D repeat=false hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    // Mod+D repeat=false hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+D repeat=false { spawn "vicinae" "toggle"; }
     //Mod+D { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+E repeat=false hotkey-overlay-title="Open file manager: Dolphin" { spawn "dolphin"; }
@@ -23,7 +23,7 @@ binds {
     XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
 
     Mod+Menu repeat=false { toggle-overview; }
-    Mod+Semicolon repeat=false { toggle-overview; }
+    Mod+A repeat=false { toggle-overview; }
 
     Mod+Q repeat=false { close-window; }
 
@@ -196,10 +196,13 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Ctrl+Escape { power-off-monitors; }
-    Mod+Alt+Ctrl+Shift+T repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "kitty" "kitty" ;}
-    Mod+T repeat=false { spawn "kitty"; }
+
+    Mod+T repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "kitty" "kitty" ;}
+    Mod+Return repeat=false { spawn "kitty"; }
     Mod+B repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "app.zen_browser.zen" "--" "flatpak" "run" "app.zen_browser.zen";}
     Mod+S repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "com.spotify.Client" "--" "flatpak" "run" "com.spotify.Client";}
+    Mod+G repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "emacsclient" "emacsclient" "-q";}
+    // Mod+G repeat=false { spawn "emacsclient" "-r";}
     Mod+Tab repeat=false { switch-focus-between-floating-and-tiling; }
     Mod+Shift+Tab repeat=false { toggle-window-floating; }
 }

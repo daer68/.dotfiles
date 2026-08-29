@@ -4,7 +4,6 @@
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "noctalia"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -20,3 +19,4 @@ spawn-at-startup "emacs" "--daemon"
 
 //spawn-sh-at-startup "arch-update --check --enable"
 //spawn-sh-at-startup "arch-update --tray --enable"
+spawn-sh-at-startup "kanata"
