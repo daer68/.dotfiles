@@ -199,7 +199,7 @@
 ;; Slow Rendering
 ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
 ;; you can try setting the following variable
-(setq inhibit-compacting-font-caches t)
+(setq inhibit-compacting-font-caches nil)
 
 ;; Dired buffers: Automatically hide file details (permissions, size,
 ;; modification date, etc.) and all the files in the `dired-omit-files' regular
@@ -1226,3 +1226,26 @@ paragraph in the buffer."
 (windmove-default-keybindings '(meta super))
 
 (provide 'binds-config)
+
+
+;; The following snippet configures Dired to open specific file extensions using the default application handler of the host operating system. It identifies the environment (macOS, Linux, or Windows) and assigns the corresponding system command (open, xdg-open, or start) to the dired-guess-shell-alist-user variable for documents, images, and media files. The main benefit is that it delegates file association management to the operating system, removing the need to configure individual applications within Emacs for every file type.
+
+(defvar my-dired-xdg-open-cmd nil)
+(with-eval-after-load 'dired
+  (when-let* ((cmd (cond
+                    ((eq system-type 'darwin)
+                     "open")
+                    ((memq system-type '(gnu gnu/linux gnu/kfreebsd
+                                             berkeley-unix))
+                     "xdg-open")
+                    ((memq system-type '(cygwin windows-nt ms-dos))
+                     "start"))))
+    (setq dired-guess-shell-alist-user
+          `(("\\.\\(?:docx\\|pdf\\|odt\\|odg\\|ods\\|djvu\\|eps\\)\\'" ,cmd)
+            ("\\.\\(?:jpe?g\\|webp\\|png\\|gif\\|xpm\\)\\'" ,cmd)
+            ("\\.\\(?:xcf\\)\\'" ,cmd)
+            ("\\.tex\\'" ,cmd)
+            ("\\.\\(?:mp4\\|mkv\\|m4a\\|avi\\|flv\\|rm\\|rmvb\\|ogv\\)\\(?:\\.part\\)?\\'" ,cmd)
+            ("\\.\\(?:mp3\\|flac\\)\\'" ,cmd)))
+    (when cmd
+      (setq my-dired-xdg-open-cmd cmd))))
