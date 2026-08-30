@@ -2,12 +2,16 @@
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 ;; (add-to-list 'default-frame-alist '(alpha . 90))
 
+(use-package colorful-mode
+  :ensure t)
+
 (use-package vim-tab-bar
   :init
   (vim-tab-bar-mode 1)
   (tab-bar-mode 0))
 
-(use-package magit)
+(use-package magit
+  :ensure t)
 
 ;; make ESC quit prompts
 (global-set-key(kbd "<escape>") 'keyboard-escape-quit)
