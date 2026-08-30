@@ -1229,7 +1229,14 @@ paragraph in the buffer."
 (provide 'binds-config)
 
 
-;; The following snippet configures Dired to open specific file extensions using the default application handler of the host operating system. It identifies the environment (macOS, Linux, or Windows) and assigns the corresponding system command (open, xdg-open, or start) to the dired-guess-shell-alist-user variable for documents, images, and media files. The main benefit is that it delegates file association management to the operating system, removing the need to configure individual applications within Emacs for every file type.
+;; Thse following snippet configures Dired to open specific file extensions
+;; ussing the default application handler of the host operating system. It
+;; idsentifies the environment (macOS, Linux,or Windows) and assigns the
+;; cosrresponding system command (open, xdg-open, or start) to the
+;; disred-guess-shell-alist-user variable for documents, images, and media
+;; fisles. The main benefit is that it delegates file association management
+;; tos the operating system, removing the need to configured individual
+;; apsdplications within Emacs for every file type.
 
 (defvar my-dired-xdg-open-cmd nil)
 (with-eval-after-load 'dired

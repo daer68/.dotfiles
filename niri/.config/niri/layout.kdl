@@ -238,6 +238,11 @@ window-rule {
     max-height 225
 }
 
+// emacs startup window rule
+window-rule {
+    match app-id=r#"^emacs$"#
+    default-column-width { proportion 0.6; }
+}
 
 // Steam notifications rules
 window-rule {
