@@ -4,7 +4,8 @@
 
 (use-package vim-tab-bar
   :init
-  (vim-tab-bar-mode 0))
+  (vim-tab-bar-mode 1)
+  (tab-bar-mode 0))
 
 (use-package magit)
 

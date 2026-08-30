@@ -201,7 +201,8 @@ binds {
     Mod+Return repeat=false { spawn "kitty"; }
     Mod+B repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "app.zen_browser.zen" "--" "flatpak" "run" "app.zen_browser.zen";}
     Mod+S repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "com.spotify.Client" "--" "flatpak" "run" "com.spotify.Client";}
-    Mod+G repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "emacsclient" "emacsclient" "-q";}
+    Mod+G repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "emacs" "--" "emacsclient" "-c" "-a" ""; }
+    // Mod+G repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "emacsclient" "emacsclient" "-q";}
     // Mod+G repeat=false { spawn "emacsclient" "-r";}
     Mod+Tab repeat=false { switch-focus-between-floating-and-tiling; }
     Mod+Shift+Tab repeat=false { toggle-window-floating; }
