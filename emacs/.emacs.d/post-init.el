@@ -2,8 +2,7 @@
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 ;; (add-to-list 'default-frame-alist '(alpha . 90))
 
-(use-package colorful-mode
-  :ensure t)
+(scroll-bar-mode 1)
 
 (use-package vim-tab-bar
   :init
@@ -1095,6 +1094,7 @@
 (use-package kdl-mode
   :commands kdl-mode
   :mode ("\\.kdl\\'" . kdl-mode))
+
 
 (use-package move-text
   :ensure t
