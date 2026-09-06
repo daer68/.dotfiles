@@ -1,0 +1,136 @@
+
+# ─────────────────────────────── Keybinds ───────────────────────────────────
+# Bind chords to compositor actions. Configured chords replace matching
+# built-ins; built-in chords not mentioned here remain active.
+# Syntax: https://docs.noctalia.dev/umbriel/keybinds/
+# Actions: https://docs.noctalia.dev/umbriel/actions/
+# ────────────────────────────────────────────────────────────────────────────
+
+[keybinds]
+
+# Applications and session
+"Mod+E" = "spawn:dolphin"
+"Mod+T" = "spawn:kitty"
+# "Mod+V" = "spawn:emacsclient"
+#"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+"Mod+D" = "spawn:vicinae toggle"
+"Mod+Q" = "window-close"
+
+# focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
+# from the old niri config's nirius bindings (niri.bak/binds.kdl)
+"Mod+Shift+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
+"Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient"
+"Mod+B" = "spawn:/home/daer/.local/bin/umbrius -a app\\.zen_browser\\.zen -- app.zen_browser.zen"
+"Mod+S" = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client"
+
+# Focus navigation. In overview, Mod+Up/Down retain normal layout focus, so they
+# traverse stacks in the default horizontal layout. Bare Up/Down move between
+# workspace rows.
+"Mod+Left" = "window-focus-left"
+"Mod+Down" = "window-focus-or-workspace-down"
+"Mod+Up" = "window-focus-or-workspace-up"
+"Mod+Right" = "window-focus-right"
+
+# Window state and layout
+"Mod+Tab" = "window-toggle-floating"
+"Mod+Shift+Tab" = "window-focus-switch-floating"
+"Mod+Ctrl+Tab" = "window-toggle-pinned"
+
+# Overview
+"Mod+G" = { action = "overview-toggle", repeat = false }
+"Mod+Menu" = { action = "overview-toggle", repeat = false }
+
+# These useful bindings are built in already. They stay commented here so an
+# included keybind file can override them without this main file winning again.
+# Uncomment a chord only when this file should own that override.
+
+"Ctrl+Alt+Delete" = "session-quit"
+"Mod+Ctrl+Left" = "column-move-left"
+"Mod+Ctrl+Down" = "window-move-down"
+"Mod+Ctrl+Up" = "window-move-up"
+"Mod+Ctrl+Right" = "column-move-right"
+# "Mod+Shift+R" = "window-cycle-width-back"
+"Mod+Comma" = "window-consume-or-expel-left"
+"Mod+Period" = "window-consume-or-expel-right"
+# "Mod+WheelUp" = "window-focus-left"
+# "Mod+WheelDown" = "window-focus-right"
+# Mod+1 through Mod+9 switch workspaces. Adding Shift moves the focused window;
+# keypad digits provide the same built-in actions.
+
+# Scratchpads
+# Each output owns a separate scratchpad. Bare actions target the output under
+# the pointer; append `:DP-1` or a monitor Config name to target one explicitly.
+# Documentation: https://docs.noctalia.dev/umbriel/scratchpads/
+#"Mod+Shift+Space" = "window-move-to-scratchpad"
+#"Mod+Space" = "scratchpad-toggle"
+#"Mod+Ctrl+Space" = "window-restore-from-scratchpad"
+#"Mod+Tab" = "scratchpad-focus-next"
+
+# Optional navigation and sizing recipes. These chords do not replace active
+# bindings above when uncommented.
+"Mod+Page_Up" = "workspace-previous"
+"Mod+Page_Down" = "workspace-next"
+"Mod+Ctrl+Page_Up" = "column-move-to-workspace-previous"
+"Mod+Ctrl+Page_Down" = "column-move-to-workspace-next"
+"Mod+Home" = "column-focus-first"
+"Mod+End" = "column-focus-last"
+# "Mod+Shift+Home" = "column-move-to-first"
+# "Mod+Shift+End" = "column-move-to-last"
+# "Mod+Bracketright" = "window-focus-next"
+# "Mod+Bracketleft" = "window-focus-previous"
+# "Mod+Shift+Bracketright" = "window-swap-next"
+# "Mod+Shift+Bracketleft" = "window-swap-previous"
+# "Mod+Minus" = "window-modify-width:-0.1"
+# "Mod+Equal" = "window-modify-width:0.1"
+# "Mod+Alt+Minus" = "window-modify-height:-0.1"
+# "Mod+Alt+Equal" = "window-modify-height:0.1"
+# "Mod+Alt+R" = "window-cycle-height"
+# "Mod+Alt+Shift+R" = "window-cycle-height-back"
+# "Mod+Grave" = "window-focus-last"
+# "Mod+BackSpace" = "window-consume-or-expel-left"
+"Mod+C" = "column-center"
+# "Mod+Shift+C" = "window-center"
+# "Mod+Shift+T" = "workspace-set-layout:toggle"
+# "Mod+MouseMiddle" = "layout-scroll-drag"
+"Mod+Space" = "keyboard-layout-next"
+
+# Submaps temporarily replace the active keybind layer and can nest. Entry
+# binds must not repeat. A table-form bind can run an action and then reset one
+# level, while a global reset provides an emergency exit from any layer.
+# Submaps: https://docs.noctalia.dev/umbriel/keybinds/#submaps
+# "Mod+S" = { action = "submap:resize", repeat = false }
+# "submap[resize],1" = { action = "window-set-width:0.5", submap = "reset" }
+# "submap[resize],N" = { action = "submap:nudge", repeat = false }
+# "submap[resize],Escape" = "submap:reset"
+# "submap[nudge],Mod+Left" = "window-modify-width:-0.05"
+# "submap[nudge],Mod+Right" = "window-modify-width:0.05"
+# "submap[nudge],Mod+Escape" = "submap:reset"
+# "Escape" = "submap:reset"
+
+# Fullscreen
+"Mod+Shift+F" = "window-toggle-fullscreen"
+"Mod+F" = "window-toggle-maximize-to-edges"
+# "Mod+F" = "window-toggle-maximize"
+
+# Resize
+"Mod+R" = "window-cycle-width"
+"Mod+Shift+R" = { action = "submap:resize", repeat = false }
+"submap[resize],1" = { action = "window-set-width:0.5", submap = "reset" }
+"submap[resize],Mod+Left" = "window-modify-width:-0.03"
+"submap[resize],Mod+Right" = "window-modify-width:0.03"
+"submap[resize],Mod+Up" = "window-modify-height:-0.03"
+"submap[resize],Mod+Down" = "window-modify-height:0.03"
+"submap[resize],Escape" = "submap:reset"
+# "Escape" = "submap:reset"
+
+# Media and brightness
+# Documentation: https://docs.noctalia.dev/umbriel/keybinds/#example-media-and-brightness-keys
+"XF86AudioRaiseVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+"XF86AudioLowerVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+"XF86AudioMute" = "spawn:wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+"XF86AudioPlay" = "spawn:playerctl play-pause"
+"XF86AudioNext" = "spawn:playerctl next"
+"XF86AudioPrev" = "spawn:playerctl previous"
+# Binds intended to work while locked use the table form.
+"XF86MonBrightnessDown" = { action = "spawn:noctalia msg brightness-down 10", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn:noctalia msg brightness-up 10", allow_when_locked = true }

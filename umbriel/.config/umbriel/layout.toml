@@ -1,0 +1,68 @@
+# ─────────────────────────────── Layout ─────────────────────────────────────
+# Configure the default tiling mode and shared sizing behavior. Workspace rules
+# above can override these values for individual workspaces.
+# Documentation: https://docs.noctalia.dev/umbriel/layout/
+# ────────────────────────────────────────────────────────────────────────────
+
+[layout]
+mode = "scrolling"                              # scrolling, dwindle, or master
+gap = 2                                         # Logical pixels between tiles, 0-500
+width_presets = [0.28, 0.7, 1]             # Width and height cycling fractions
+
+[layout.struts]
+# Signed logical pixels reserved after panel exclusive zones. Negative values
+# expand the tiled area beyond that edge.
+left = 0                                        # -65535 to 65535
+right = 0
+top = 0
+bottom = 0
+
+[layout.scrolling]
+# direction = "horizontal"                      # horizontal or vertical strip axis
+# default_width_fraction = 0.5                    # Initial width for new columns, 0.1-1.0
+center_underfull_strip = true                   # Center a strip narrower than the viewport
+center_focused = false                          # Always center the focused column
+expand_single_column = false                     # Let a lone column fill the viewport
+
+[layout.dwindle]
+# preserve_split = false                        # Keep every split direction fixed after creation
+
+[layout.master]
+position = "left"                               # left or right master area
+default_width_fraction = 0.6                   # Initial master area fraction, 0.1-0.9
+new_on_top = true                               # Put new windows at the top of the stack
+
+
+# ─────────────────────── Overview and Hot Corners ───────────────────────────
+# Configure the all-workspaces overview and pointer-triggered corner actions.
+# Overview: https://docs.noctalia.dev/umbriel/workspaces-overview/
+# Hot corners: https://docs.noctalia.dev/umbriel/keybinds/#hot-corners
+# ────────────────────────────────────────────────────────────────────────────
+
+[overview]
+zoom = 0.4                                      # Workspace scale in overview, 0.1-0.75
+# Pinned windows stay hidden until overview closes; visible scratchpads are dismissed.
+background_blur = true                        # Blur the wallpaper behind overview rows
+workspace_wallpaper = true                    # Mirror wallpapers inside workspace previews
+shortcuts = false                              # Show keyboard shortcut badges on windows
+shortcut_keys = "123456789"                  # Badge keys in preference order
+
+[hot_corners.top_left]
+enabled = false                                  # Open the overview after resting here
+delay_ms = 300                                  # 0 activates immediately; maximum is 10000
+action = "overview-open"                        # Any normal Umbriel action is accepted
+
+[hot_corners.top_right]
+enabled = false
+delay_ms = 500
+action = "overview-close"
+
+[hot_corners.bottom_left]
+enabled = false
+delay_ms = 500
+action = "overview-toggle"
+
+[hot_corners.bottom_right]
+enabled = false
+delay_ms = 500
+action = "spawn:notify-send 'Bottom right'"
