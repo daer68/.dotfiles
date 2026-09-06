@@ -198,7 +198,8 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Ctrl+Escape { power-off-monitors; }
 
-    Mod+T repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "kitty" "kitty" ;}
+    // Mod+T repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "kitty" "kitty" ;}
+    Mod+T repeat=false { spawn "kitty"; }
     Mod+Return repeat=false { spawn "kitty"; }
     Mod+B repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "app.zen_browser.zen" "--" "flatpak" "run" "app.zen_browser.zen";}
     Mod+S repeat=false { spawn "nirius" "focus-or-spawn" "--app-id" "com.spotify.Client" "--" "flatpak" "run" "com.spotify.Client";}

@@ -1,13 +1,23 @@
 ;;transparency
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 70))
 ;; (add-to-list 'default-frame-alist '(alpha . 90))
 
-(scroll-bar-mode 1)
+(use-package yascroll
+  :ensure t
+  :init
+  (global-yascroll-bar-mode 1)
+  (defface yascroll:thumb-text-area
+    '((t (:background "#ffdd33")))
+    "Face for text-area scroll bar thumb."
+    :group 'yascroll)
+  (defface yascroll:thumb-fringe
+    '((t (:background "#ffdd33" :foreground "#ffdd33")))
+    "Face for fringe scroll bar thumb."
+    :group 'yascroll))
 
 (use-package vim-tab-bar
   :init
-  (vim-tab-bar-mode 1)
-  (tab-bar-mode 0))
+  (vim-tab-bar-mode 1))
 
 (use-package magit
   :ensure t)
@@ -27,9 +37,7 @@
                                     dashboard-insert-navigator
                                     dashboard-insert-newline
                                     dashboard-insert-init-info
-                                    dashboard-insert-items
-                                    dashboard-insert-newline
-                                    dashboard-insert-footer))
+                                    dashboard-insert-items))
   (setq dashboard-items '((recents   . 10)
                           (bookmarks . 5)
                           (projects  . 5)
@@ -99,13 +107,13 @@
   (buffer-guardian-mode 1))
 
 ;;fzf emacs
-(use-package fzf
-  :bind
-  ;; Don't forget to set keybinds!
-  :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"))
+;; (use-package fzf
+;;   :bind
+;;   ;; Don't forget to set keybinds!
+;;   :config
+;;   (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+;;         fzf/executable "fzf"
+;;         fzf/git-grep-args "-i --line-number %s"))
 
 ;; Configure built-in sgml-mode to automatically enable
 ;; `sgml-electric-tag-pair-mode' in `html-mode' and `mhtml-mode', providing
