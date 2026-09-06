@@ -24,6 +24,12 @@ hdr = "on"                                  # off, on, auto, or fullscreen
 sdr_white = 180                               # SDR reference white in cd/m2 during HDR
 workspaces = ["CHAT","MEDIA","BASE","4","5","6","7","8","9"] # Omit for dynamic workspaces
 
+[output.eDP-1]
+mode = "1920x1200@60"
+scale = 1.25
+tearing = true
+workspaces = ["CHAT","MEDIA","BASE","4","5","6","7","8","9"]
+
 # Replace the count with ["WEB", "CHAT", "MEDIA"] for named static workspaces,
 # or with "dynamic" to state the dynamic default explicitly. A dynamic output
 # can keep a minimum number of workspaces instead, so a bar always shows them:

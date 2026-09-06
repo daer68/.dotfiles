@@ -10,15 +10,15 @@
 
 # Applications and session
 "Mod+E" = "spawn:dolphin"
-"Mod+T" = "spawn:kitty"
+"Mod+Shift+T" = "spawn:kitty"
 # "Mod+V" = "spawn:emacsclient"
-#"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
-"Mod+D" = "spawn:vicinae toggle"
+"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+# "Mod+D" = "spawn:vicinae toggle"
 "Mod+Q" = "window-close"
 
 # focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
 # from the old niri config's nirius bindings (niri.bak/binds.kdl)
-"Mod+Shift+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
+"Mod+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
 "Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient"
 "Mod+B" = "spawn:/home/daer/.local/bin/umbrius -a app\\.zen_browser\\.zen -- app.zen_browser.zen"
 "Mod+S" = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client"
