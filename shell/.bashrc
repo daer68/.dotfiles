@@ -20,4 +20,8 @@ function y() {
 export TERMINAL=/usr/bin/kitty
 export EDITOR=helix
 eval "$(starship init bash)"
-[ -x /usr/bin/fish ] && exec fish
+
+#exec fish for interactive use
+if grep -qv 'fish' /proc/$PPID/comm && [[ ${SHLVL} == [1,2] ]]; then
+    exec fish
+fi

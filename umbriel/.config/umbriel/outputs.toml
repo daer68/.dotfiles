@@ -15,9 +15,9 @@
 enabled = true                                # False removes the output but preserves its state
 mode = "2560x1440@280"                        # WIDTHxHEIGHT or WIDTHxHEIGHT@HZ
 position = [0,0]                             # Logical top-left; omit for automatic placement
-scale = 1.25                                  # Logical size is mode size divided by scale
+scale = 1.2                                  # Logical size is mode size divided by scale
 transform = "normal"                          # normal, 90, 180, 270, or a flipped variant
-vrr = "fullscreen"                            # disabled, always, or fullscreen
+vrr = "disabled"                            # disabled, always, or fullscreen
 tearing = true                                # Permit eligible fullscreen asynchronous flips
 # direct_scanout = true                         # False forces composition on this output
 hdr = "on"                                  # off, on, auto, or fullscreen

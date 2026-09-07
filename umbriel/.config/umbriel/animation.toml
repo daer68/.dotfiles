@@ -12,24 +12,24 @@ curve = "easeout"                               # Built-in or registered bezier/
 
 # Window opening
 [animation.windows_in]
-enabled = true
-duration_ms = 150
-curve = "easeout"
-style = "popin"                                 # popin, zoom, slide, fade, or none
-scale = 0.85                                    # Popin start scale, 0.1-1.0
+enabled = false
+duration_ms = 250
+curve = "myBezier"
+style = "slide"                                 # popin, zoom, slide, fade, or none
+#scale = 0.85                                    # Popin start scale, 0.1-1.0
 
 # Window closing
 [animation.windows_out]
-enabled = true
-duration_ms = 150
-curve = "easeout"
-style = "fade"                                  # fade or slide
+enabled = false
+duration_ms = 250
+curve = "snappy"
+style = "slide"                                  # fade or slide
 
 # Window movement, resizing, and floating maximize
 [animation.windows_move]
 enabled = true
-duration_ms = 550
-curve = "myBezier"
+duration_ms = 350
+curve = "easeout"
 # curve = "snappy"
 
 # Workspace switching
@@ -63,14 +63,14 @@ curve = "easeout"
 
 # Unfocused window opacity
 [animation.dim_unfocused]
-enabled = false
-duration_ms = 250
+enabled = true
+duration_ms = 400
 curve = "easeout"
-dim = 0.0                                       # 0 disables dimming; maximum is 1.0
+dim = 0.05                                      # 0 disables dimming; maximum is 1.0
 
 # Layer-shell surface mapping and unmapping
 [animation.layers]
-enabled = false
+enabled = true
 duration_ms = 250
 curve = "easeout"
 
@@ -81,4 +81,4 @@ curve = "easeout"
 myBezier = [0.05, 0.9, 0.1, 1.0]
 
 [animation.springs]
-# myBounce = { damping = 0.5, stiffness = 200 }
+myBounce = { damping = 0.5, stiffness = 200 }

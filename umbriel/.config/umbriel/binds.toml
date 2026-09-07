@@ -10,6 +10,7 @@
 
 # Applications and session
 "Mod+E" = "spawn:dolphin"
+<<<<<<< HEAD
 "Mod+Shift+T" = "spawn:kitty"
 # "Mod+V" = "spawn:emacsclient"
 "Mod+D" = "spawn:noctalia msg panel-toggle launcher"
@@ -20,6 +21,17 @@
 # from the old niri config's nirius bindings (niri.bak/binds.kdl)
 "Mod+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
 "Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient"
+=======
+"Mod+T" = "spawn:kitty"
+"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+# "Mod+D" = "spawn:vicinae toggle"
+# "Mod+D" = "spawn:fuzzel"
+"Mod+Q" = "window-close"
+
+# focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
+"Mod+Shift+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
+"Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient --alternate-editor= --create-frame"
+>>>>>>> 118cf36 (fixes)
 "Mod+B" = "spawn:/home/daer/.local/bin/umbrius -a app\\.zen_browser\\.zen -- app.zen_browser.zen"
 "Mod+S" = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client"
 
@@ -32,8 +44,8 @@
 "Mod+Right" = "window-focus-right"
 
 # Window state and layout
-"Mod+Tab" = "window-toggle-floating"
-"Mod+Shift+Tab" = "window-focus-switch-floating"
+"Mod+Shift+Tab" = "window-toggle-floating"
+"Mod+Tab" = "window-focus-switch-floating"
 "Mod+Ctrl+Tab" = "window-toggle-pinned"
 
 # Overview
@@ -74,18 +86,12 @@
 "Mod+Ctrl+Page_Down" = "column-move-to-workspace-next"
 "Mod+Home" = "column-focus-first"
 "Mod+End" = "column-focus-last"
-# "Mod+Shift+Home" = "column-move-to-first"
-# "Mod+Shift+End" = "column-move-to-last"
+"Mod+Ctrl+Home" = "column-move-to-first"
+"Mod+Ctrl+End" = "column-move-to-last"
 # "Mod+Bracketright" = "window-focus-next"
 # "Mod+Bracketleft" = "window-focus-previous"
 # "Mod+Shift+Bracketright" = "window-swap-next"
 # "Mod+Shift+Bracketleft" = "window-swap-previous"
-# "Mod+Minus" = "window-modify-width:-0.1"
-# "Mod+Equal" = "window-modify-width:0.1"
-# "Mod+Alt+Minus" = "window-modify-height:-0.1"
-# "Mod+Alt+Equal" = "window-modify-height:0.1"
-# "Mod+Alt+R" = "window-cycle-height"
-# "Mod+Alt+Shift+R" = "window-cycle-height-back"
 # "Mod+Grave" = "window-focus-last"
 # "Mod+BackSpace" = "window-consume-or-expel-left"
 "Mod+C" = "column-center"

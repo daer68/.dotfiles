@@ -1,5 +1,5 @@
 ;;transparency
-(add-to-list 'default-frame-alist '(alpha-background . 70))
+(add-to-list 'default-frame-alist '(alpha-background . 95))
 ;; (add-to-list 'default-frame-alist '(alpha . 90))
 
 (use-package yascroll
