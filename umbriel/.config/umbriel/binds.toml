@@ -7,21 +7,32 @@
 # ────────────────────────────────────────────────────────────────────────────
 
 [keybinds]
+
+# Applications and session
+"Mod+E" = "spawn:dolphin"
+<<<<<<< HEAD
+"Mod+Shift+T" = "spawn:kitty"
+# "Mod+V" = "spawn:emacsclient"
+"Mod+D" = "spawn:noctalia msg panel-toggle launcher"
+# "Mod+D" = "spawn:vicinae toggle"
+"Mod+Q" = "window-close"
+
 # focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
 # from the old niri config's nirius bindings (niri.bak/binds.kdl)
-# "Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient"
+"Mod+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
+"Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient"
+=======
 "Mod+T" = "spawn:kitty"
 "Mod+D" = "spawn:noctalia msg panel-toggle launcher"
 # "Mod+D" = "spawn:vicinae toggle"
 # "Mod+D" = "spawn:fuzzel"
 "Mod+Q" = "window-close"
-"Mod+E" = "spawn:dolphin"
 
 # focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
 "Mod+Shift+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
 "Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient --alternate-editor= --create-frame"
+>>>>>>> 118cf36 (fixes)
 "Mod+B" = "spawn:/home/daer/.local/bin/umbrius -a app\\.zen_browser\\.zen -- app.zen_browser.zen"
-
 "Mod+S" = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client"
 
 # Focus navigation. In overview, Mod+Up/Down retain normal layout focus, so they
@@ -62,8 +73,6 @@
 # Each output owns a separate scratchpad. Bare actions target the output under
 # the pointer; append `:DP-1` or a monitor Config name to target one explicitly.
 # Documentation: https://docs.noctalia.dev/umbriel/scratchpads/
-
-
 #"Mod+Shift+Space" = "window-move-to-scratchpad"
 #"Mod+Space" = "scratchpad-toggle"
 #"Mod+Ctrl+Space" = "window-restore-from-scratchpad"
@@ -79,7 +88,12 @@
 "Mod+End" = "column-focus-last"
 "Mod+Ctrl+Home" = "column-move-to-first"
 "Mod+Ctrl+End" = "column-move-to-last"
-
+# "Mod+Bracketright" = "window-focus-next"
+# "Mod+Bracketleft" = "window-focus-previous"
+# "Mod+Shift+Bracketright" = "window-swap-next"
+# "Mod+Shift+Bracketleft" = "window-swap-previous"
+# "Mod+Grave" = "window-focus-last"
+# "Mod+BackSpace" = "window-consume-or-expel-left"
 "Mod+C" = "column-center"
 # "Mod+Shift+C" = "window-center"
 # "Mod+Shift+T" = "workspace-set-layout:toggle"
@@ -102,7 +116,7 @@
 # Fullscreen
 "Mod+Shift+F" = "window-toggle-fullscreen"
 "Mod+F" = "window-toggle-maximize-to-edges"
-#"Mod+F" = "window-toggle-maximize"
+# "Mod+F" = "window-toggle-maximize"
 
 # Resize
 "Mod+R" = "window-cycle-width"
@@ -112,17 +126,8 @@
 "submap[resize],Mod+Right" = "window-modify-width:0.03"
 "submap[resize],Mod+Up" = "window-modify-height:-0.03"
 "submap[resize],Mod+Down" = "window-modify-height:0.03"
-"submap[resize],C" = { action = "column-center", submap = "reset"}
 "submap[resize],Escape" = "submap:reset"
-"Escape" = "submap:reset"
-
-#Music control
-"Mod+M" = { action = "submap:music", repeat = false }
-"submap[music],S" = { action = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client", submap = "reset" }
-"submap[music],P" = { action = "spawn:playerctl play-pause", submap = "reset" }
-"submap[music],N" = { action = "spawn:playerctl next", submap = "reset" }
-"submap[music],Shift+N" = { action = "spawn:playerctl previous", submap = "reset" }
-
+# "Escape" = "submap:reset"
 
 # Media and brightness
 # Documentation: https://docs.noctalia.dev/umbriel/keybinds/#example-media-and-brightness-keys
