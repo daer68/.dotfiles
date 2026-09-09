@@ -8,11 +8,7 @@
 
 [keybinds]
 # focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
-# from the old niri config's nirius bindings (niri.bak/binds.kdl)
-# "Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient"
 "Mod+T" = "spawn:kitty"
-# "Mod+D" = "spawn:noctalia msg panel-toggle launcher"
-# "Mod+D" = "spawn:vicinae toggle"
 "Mod+D" = "spawn:/home/daer/.local/bin/umbrius-fuzzel"
 "Mod+Q" = "window-close"
 "Mod+E" = "spawn:dolphin"
