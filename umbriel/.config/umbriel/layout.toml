@@ -44,7 +44,7 @@ zoom = 0.4                                      # Workspace scale in overview, 0
 background_blur = true                        # Blur the wallpaper behind overview rows
 workspace_wallpaper = true                    # Mirror wallpapers inside workspace previews
 shortcuts = false                              # Show keyboard shortcut badges on windows
-shortcut_keys = "123456789"                  # Badge keys in preference order
+# shortcut_keys = "123456789"                  # Badge keys in preference order
 
 [hot_corners.top_left]
 enabled = false                                  # Open the overview after resting here
