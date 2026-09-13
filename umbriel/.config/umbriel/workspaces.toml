@@ -108,6 +108,18 @@ match.app_id = "^spotify$"
 default_workspace = "MEDIA"
 default_maximize = true
 
+#Steam client
+[[window_rule]]
+match.app_id = "^steam$"
+default_workspace = "MEDIA"
+default_width = 0.6
+
+#Heroic Games Launcher
+[[window_rule]]
+match.app_id = "^heroic$"
+default_workspace = "MEDIA"
+default_width = 0.6
+
 
 
 # [[window_rule]]
@@ -128,20 +140,28 @@ default_maximize = true
 # match.app_id = "^discord$"
 # default_maximize_to_edges = true
 
-# Match a standardized surface content hint.
+# All games, any store (Steam, Epic, GOG, ...) - fullscreen on MEDIA.
+# A store frontend never touches the game window itself, so matching happens
+# on signals the game/wrapper sets directly: the Wayland content-type hint
+# (native titles, gamescope), the Proton/umu wrapper tag (covers Epic and GOG
+# titles launched through Heroic via Proton-GE, not just Steam), and a Steam
+# title fallback for windows that report neither.
 
 [[window_rule]]
 match.content_type = "game"
-default_workspace = 1
-vrr = "always"
+default_workspace = "MEDIA"
 default_fullscreen = true
-
-# Match a client-defined XDG toplevel tag, such as Proton-EM's game tag.
 
 [[window_rule]]
-default_workspace = 1
 match.xdg_tag = "^proton-game$"
+default_workspace = "MEDIA"
 default_fullscreen = true
+
+[[window_rule]]
+match.app_id = "^steam_app_[0-9]+$"
+default_workspace = "MEDIA"
+default_fullscreen = true
+
 
 # Seed a new horizontal scrolling column with a pixel width. The layout controls
 # its tiled height, and existing named columns keep their established width.

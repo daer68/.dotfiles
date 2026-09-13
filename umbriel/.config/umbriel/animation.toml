@@ -7,14 +7,14 @@
 
 [animation]
 enabled = true                                  # Master animation switch
-duration_ms = 250                               # Shared duration, 1-10000 ms
+duration_ms = 250                              # Shared duration, 1-10000 ms
 curve = "easeout"                               # Built-in or registered bezier/spring curve name
 
 # Window opening
 [animation.windows_in]
 enabled = false
 duration_ms = 250
-curve = "myBezier"
+curve = "snappy"
 style = "slide"                                 # popin, zoom, slide, fade, or none
 #scale = 0.85                                    # Popin start scale, 0.1-1.0
 
@@ -29,20 +29,20 @@ style = "slide"                                  # fade or slide
 [animation.windows_move]
 enabled = true
 duration_ms = 350
-curve = "easeout"
-# curve = "snappy"
+# curve = "easeout"
+curve = "snappy"
 
 # Workspace switching
 [animation.workspaces]
 enabled = true
 duration_ms = 250
-curve = "easeout"
+curve = "snappy"
 
 # Overview opening, closing, and row settling
 [animation.overview]
 enabled = true
 duration_ms = 250
-curve = "easeout"
+curve = "snappy"
 
 # Scratchpad show, hide, and backdrop
 [animation.scratchpad]
@@ -57,9 +57,9 @@ fullscreen = false                              # Make the scratchpad window ful
 
 # Focus border color
 [animation.border]
-enabled = false
-duration_ms = 250
-curve = "easeout"
+enabled = true
+duration_ms = 500
+curve = "snappy"
 
 # Unfocused window opacity
 [animation.dim_unfocused]

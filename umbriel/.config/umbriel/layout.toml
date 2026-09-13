@@ -6,7 +6,7 @@
 
 [layout]
 mode = "scrolling"                              # scrolling, dwindle, or master
-gap = 2                                         # Logical pixels between tiles, 0-500
+gap = 0                                         # Logical pixels between tiles, 0-500
 width_presets = [0.3, 0.5, 0.7, 1]             # Width and height cycling fractions
 
 [layout.struts]
@@ -47,8 +47,8 @@ shortcuts = false                              # Show keyboard shortcut badges o
 # shortcut_keys = "123456789"                  # Badge keys in preference order
 
 [hot_corners.top_left]
-enabled = false                                  # Open the overview after resting here
-delay_ms = 300                                  # 0 activates immediately; maximum is 10000
+enabled = true                                  # Open the overview after resting here
+delay_ms = 100                                  # 0 activates immediately; maximum is 10000
 action = "overview-open"                        # Any normal Umbriel action is accepted
 
 [hot_corners.top_right]

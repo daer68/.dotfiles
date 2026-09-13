@@ -21,7 +21,7 @@ vrr = "disabled"                              # disabled, always, or fullscreen
 tearing = true                                # Permit eligible fullscreen asynchronous flips
 # direct_scanout = true                       # False forces composition on this output
 hdr = "on"                                    # off, on, auto, or fullscreen
-sdr_white = 180                               # SDR reference white in cd/m2 during HDR
+sdr_white = 160                               # SDR reference white in cd/m2 during HDR
 # workspaces = ["CHAT","MEDIA","BASE","4","5","6","7","8","9"] # Omit for dynamic workspaces
 
 [output.eDP-1]

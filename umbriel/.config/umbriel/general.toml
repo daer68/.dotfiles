@@ -9,7 +9,7 @@ autostart = ["noctalia","emacs --daemon","kanata"]       # Commands run once whe
 # mod_key = "Super"                             # Force Super instead of nested-session Alt
 xwayland = true                                 # Requires xwayland-satellite; restart to change
 show_cheatsheet = false                         # Show the keybind overlay on startup
-focus_on_activate = false                        # Do not let unsolicited requests steal focus
+focus_on_activate = false                       # Do not let unsolicited requests steal focus
 honor_restored_maximize = false                 # Honor restored maximized state
 
 # Session environment
