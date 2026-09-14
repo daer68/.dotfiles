@@ -95,12 +95,12 @@ default_width = 0.3
 #Dolphin
 [[window_rule]]
 match.app_id = "org.kde.dolphin"
-default_width = 0.4
+default_width = 0.3
 
 #Kitty
 [[window_rule]]
 match.app_id = "kitty*"
-default_width = 0.4
+default_width = 0.3
 
 #Emacs
 [[window_rule]]
