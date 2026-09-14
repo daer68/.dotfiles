@@ -8,7 +8,7 @@
 [workspaces]
 
 back_and_forth = true                         # Re-select active workspace to switch back
-empty_above = false                            # Keep one empty workspace above active range
+empty_above = true                            # Keep one empty workspace above active range
 
 # Workspace rules customize layout without creating workspaces. Select exactly
 # one `index` or `name`; `output` is optional. This recipe works with dynamic
@@ -95,30 +95,35 @@ default_width = 0.3
 #Dolphin
 [[window_rule]]
 match.app_id = "org.kde.dolphin"
-default_width = 0.3
+default_width = 0.4
 
 #Kitty
 [[window_rule]]
 match.app_id = "kitty*"
-default_width = 0.3
+default_width = 0.4
+
+#Emacs
+[[window_rule]]
+match.app_id = "^emacs$"
+default_width = 0.6
 
 #Spotify
 [[window_rule]]
 match.app_id = "^spotify$"
 default_workspace = "MEDIA"
-default_maximize = true
+default_maximize_to_edges = true
 
 #Steam client
 [[window_rule]]
 match.app_id = "^steam$"
 default_workspace = "MEDIA"
-default_width = 0.6
+default_width = 0.8
 
 #Heroic Games Launcher
 [[window_rule]]
 match.app_id = "^heroic$"
 default_workspace = "MEDIA"
-default_width = 0.6
+default_width = 0.8
 
 
 
@@ -207,7 +212,7 @@ default_fullscreen = true
 [[window_rule]]
 match.is_focused = false
 opacity = 0.99
-
-[[window_rule]]
-match.is_focused = true
-opacity = 1
+#
+# [[window_rule]]
+# match.is_focused = true
+# opacity = 1

@@ -28,9 +28,9 @@ style = "slide"                                  # fade or slide
 # Window movement, resizing, and floating maximize
 [animation.windows_move]
 enabled = true
-duration_ms = 350
-# curve = "easeout"
-curve = "snappy"
+duration_ms = 300
+curve = "easeout"
+# curve = "snappy"
 
 # Workspace switching
 [animation.workspaces]
@@ -41,7 +41,7 @@ curve = "snappy"
 # Overview opening, closing, and row settling
 [animation.overview]
 enabled = true
-duration_ms = 250
+duration_ms = 500
 curve = "snappy"
 
 # Scratchpad show, hide, and backdrop
@@ -59,7 +59,7 @@ fullscreen = false                              # Make the scratchpad window ful
 [animation.border]
 enabled = true
 duration_ms = 500
-curve = "snappy"
+curve = "easeout"
 
 # Unfocused window opacity
 [animation.dim_unfocused]

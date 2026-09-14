@@ -80,7 +80,7 @@
 "Mod+C" = "column-center"
 # "Mod+Shift+C" = "window-center"
 # "Mod+Shift+T" = "workspace-set-layout:toggle"
-# "Mod+MouseMiddle" = "layout-scroll-drag"
+"Mod+MouseMiddle" = "layout-scroll-drag"
 "Mod+Space" = "keyboard-layout-next"
 
 # Submaps temporarily replace the active keybind layer and can nest. Entry
