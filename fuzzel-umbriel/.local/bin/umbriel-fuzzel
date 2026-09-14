@@ -1,0 +1,195 @@
+#!/usr/bin/env python3
+"""umbriel-fuzzel — a fuzzel-driven picker with focus-or-spawn built in.
+
+Feeds every visible .desktop entry into `fuzzel --dmenu` (with icons, via
+fuzzel's Rofi-style extended dmenu protocol). Enter focuses a running
+instance if one exists, else spawns a new one, via `umbriel-raise`.
+Ctrl+Enter (bound to fuzzel's custom-1) always spawns a new instance,
+bypassing the check.
+
+Requires: PyGObject (Gio/GLib), fuzzel, umbriel, umbriel-raise.
+"""
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+from dataclasses import dataclass
+
+import gi
+
+gi.require_version("Gio", "2.0")
+from gi.repository import Gio, GLib
+
+UMBRIEL_RAISE = os.path.expanduser("~/.local/bin/umbriel-raise")
+CUSTOM_1_EXIT_CODE = 10
+
+FIELD_CODE_RE = re.compile(r"(?<!\S)%[fFuUdDnNickvm](?!\S)")
+FLATPAK_FORWARDING_RE = re.compile(r"\s*@@[uU].*?@@\s*")
+
+
+@dataclass
+class Entry:
+    argv: list[str]
+    app_id_guesses: list[str]
+    icon: str
+
+
+def flatpak_app_id(argv: list[str]) -> str | None:
+    """Extract the app ID from a `flatpak run [OPTIONS] APP_ID ...` argv."""
+    if not argv or os.path.basename(argv[0]) != "flatpak":
+        return None
+    if "run" not in argv:
+        return None
+    for tok in argv[argv.index("run") + 1 :]:
+        if not tok.startswith("--"):
+            return tok
+    return None
+
+
+def clean_argv(exec_str: str) -> list[str] | None:
+    exec_str = FLATPAK_FORWARDING_RE.sub(" ", exec_str)
+    exec_str = exec_str.replace("%%", "\x00PCT\x00")
+    exec_str = FIELD_CODE_RE.sub("", exec_str)
+    exec_str = exec_str.replace("\x00PCT\x00", "%")
+    exec_str = " ".join(exec_str.split())
+    if not exec_str:
+        return None
+    try:
+        ok, argv = GLib.shell_parse_argv(exec_str)
+    except GLib.Error:
+        return None
+    return argv if ok and argv else None
+
+
+def icon_field(app: Gio.AppInfo) -> str:
+    icon = app.get_icon()
+    if icon is None:
+        return ""
+    name = icon.to_string()
+    if name is None:
+        return ""
+    return name if name.startswith("/") else name.split(",")[0]
+
+
+def collect_entries() -> dict[str, Entry]:
+    entries: dict[str, Entry] = {}
+    for app in Gio.AppInfo.get_all():
+        if not app.should_show():
+            continue
+        try:
+            exec_str = app.get_string("Exec")
+        except Exception:
+            continue
+        if not exec_str:
+            continue
+        argv = clean_argv(exec_str)
+        if not argv:
+            continue
+        if app.get_boolean("Terminal"):
+            terminal = os.environ.get("TERMINAL", "kitty")
+            argv = [terminal, "-e"] + argv
+
+        # The real runtime app_id doesn't reliably come from just one
+        # source: StartupWMClass matches for some apps (e.g. Spotify),
+        # while others (e.g. flatpak'd Zen Browser) only match their
+        # flatpak ref or desktop-file id instead. Collect every plausible
+        # candidate and match any of them.
+        candidates = dict.fromkeys(  # dedup, preserve order
+            c
+            for c in (
+                app.get_startup_wm_class(),
+                flatpak_app_id(argv),
+                app.get_id().removesuffix(".desktop"),
+            )
+            if c
+        )
+        app_id_guesses = list(candidates) or [os.path.basename(argv[0])]
+
+        entries[app.get_display_name()] = Entry(argv, app_id_guesses, icon_field(app))
+    return entries
+
+
+def live_app_ids() -> set[str]:
+    """App IDs Umbriel currently reports as open."""
+    try:
+        output = subprocess.run(
+            ["umbriel", "windows", "--json"],
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True,
+        ).stdout
+        return {window.get("app_id", "") for window in json.loads(output)}
+    except (OSError, subprocess.CalledProcessError, json.JSONDecodeError):
+        return set()
+
+
+def resolve_app_id(guesses: list[str]) -> str:
+    """Choose the guess that names a window that is actually open.
+
+    umbriel-raise matches app_id exactly, while a .desktop entry can imply
+    several plausible IDs (StartupWMClass, flatpak ref, desktop-file id) and
+    only one of them tends to be the real one. Prefer whichever is on screen;
+    otherwise fall back to the first guess, where matching nothing is correct
+    and umbriel-raise spawns instead of focusing.
+    """
+    live = live_app_ids()
+    for guess in guesses:
+        if guess in live:
+            return guess
+    return guesses[0]
+
+
+def menu_line(name: str, entry: Entry) -> str:
+    if not entry.icon:
+        return name
+    return f"{name}\0icon\x1f{entry.icon}"
+
+
+CACHE_PATH = os.path.expanduser("~/.cache/umbriel-fuzzel/dmenu.cache")
+
+
+def run_fuzzel(entries: dict[str, Entry]) -> tuple[str, int]:
+    lines = [menu_line(name, entries[name]) for name in sorted(entries, key=str.casefold)]
+    os.makedirs(os.path.dirname(CACHE_PATH), exist_ok=True)
+    proc = subprocess.run(
+        ["fuzzel", "--dmenu", "--cache", CACHE_PATH],
+        input="\n".join(lines) + "\n",
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    return proc.stdout.strip("\n"), proc.returncode
+
+
+def spawn_raw(argv: list[str]) -> None:
+    os.execvp("umbriel", ["umbriel", "msg", f"spawn:{' '.join(argv)}"])
+
+
+def main() -> int:
+    if shutil.which("fuzzel") is None:
+        print("umbriel-fuzzel: 'fuzzel' not found on PATH", file=sys.stderr)
+        return 1
+
+    entries = collect_entries()
+    selection, rc = run_fuzzel(entries)
+
+    if not selection:
+        return 0
+
+    entry = entries.get(selection)
+    if entry is None:
+        # free-typed text fuzzel couldn't match to any entry
+        spawn_raw([selection])
+        return 0
+
+    if rc == CUSTOM_1_EXIT_CODE:
+        spawn_raw(entry.argv)
+        return 0
+
+    app_id = resolve_app_id(entry.app_id_guesses)
+    os.execv(UMBRIEL_RAISE, [UMBRIEL_RAISE, "--app-id", app_id, "--"] + entry.argv)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
