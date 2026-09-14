@@ -7,19 +7,19 @@
 # ────────────────────────────────────────────────────────────────────────────
 
 [keybinds]
-# focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
+# focus-or-spawn via umbriel-raise (https://github.com/rigerc/umbriel-raise)
 "Mod+T" = "spawn:kitty"
-"Mod+D" = "spawn:/home/daer/.local/bin/umbrius-fuzzel"
+"Mod+D" = "spawn:/home/daer/.local/bin/umbriel-fuzzel"
 "Mod+Q" = "window-close"
 "Mod+E" = "spawn:dolphin"
 
-# focus-or-spawn via umbrius (https://github.com/daer68/umbrius) — restored
-"Mod+Shift+T" = "spawn:/home/daer/.local/bin/umbrius -a ^kitty$ -- kitty"
-"Mod+V" = "spawn:/home/daer/.local/bin/umbrius -a ^emacs$ -- emacsclient --alternate-editor= --create-frame"
-"Mod+B" = "spawn:/home/daer/.local/bin/umbrius -a app\\.zen_browser\\.zen -- app.zen_browser.zen"
+# focus-or-spawn via umbriel-raise (https://github.com/rigerc/umbriel-raise)
+"Mod+Shift+T" = { action = "spawn:/home/daer/.local/bin/umbriel-raise --app-id kitty -- kitty", repeat = false }
+"Mod+V" = { action = "spawn:/home/daer/.local/bin/umbriel-raise --app-id emacs -- emacsclient --alternate-editor= --create-frame", repeat = false }
+"Mod+B" = { action = "spawn:/home/daer/.local/bin/umbriel-raise --app-id app.zen_browser.zen -- app.zen_browser.zen", repeat = false }
 
-"Mod+S" = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client"
-"Mod+Grave" = "spawn:/home/daer/.local/bin/umbrius-cycle"
+"Mod+S" = { action = "spawn:/home/daer/.local/bin/umbriel-raise --app-id spotify -- com.spotify.Client", repeat = false }
+"Mod+Grave" = { action = "spawn:/home/daer/.local/bin/umbriel-raise cycle", repeat = false }
 
 # Focus navigation. In overview, Mod+Up/Down retain normal layout focus, so they
 # traverse stacks in the default horizontal layout. Bare Up/Down move between
@@ -115,7 +115,7 @@
 
 #Music control
 "Mod+M" = { action = "submap:music", repeat = false }
-"submap[music],S" = { action = "spawn:/home/daer/.local/bin/umbrius -a ^spotify$ -- com.spotify.Client", submap = "reset" }
+"submap[music],S" = { action = "spawn:/home/daer/.local/bin/umbriel-raise --app-id spotify -- com.spotify.Client", submap = "reset" }
 "submap[music],P" = { action = "spawn:playerctl play-pause", submap = "reset" }
 "submap[music],N" = { action = "spawn:playerctl next", submap = "reset" }
 "submap[music],Shift+N" = { action = "spawn:playerctl previous", submap = "reset" }

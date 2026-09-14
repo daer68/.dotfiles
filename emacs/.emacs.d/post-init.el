@@ -1,6 +1,5 @@
 ;;transparency
 (add-to-list 'default-frame-alist '(alpha-background . 95))
-;; (add-to-list 'default-frame-alist '(alpha . 90))
 
 (use-package yascroll
   :ensure t
@@ -56,12 +55,6 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   (dashboard-setup-startup-hook))
-
-(use-package dimmer
-  :ensure t
-  :config
-  (dimmer-configure-which-key)
-  (dimmer-mode t))
 
 (use-package gruber-darker-theme)
 (let ((inhibit-redisplay t))
